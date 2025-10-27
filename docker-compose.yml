@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  futurecoder:
+    build: .
+    ports:
+      - "8080:80"
+    container_name: futurecoder_app
