@@ -17,7 +17,7 @@ WORKDIR /app
 COPY pyproject.toml poetry.lock ./
 
 # Install python dependencies
-RUN poetry install --no-dev --no-root
+RUN poetry install --only main --no-root
 
 
 # Stage 2: Static file generation
