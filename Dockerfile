@@ -30,7 +30,7 @@ WORKDIR /app
 COPY . .
 
 # Generate static files
-RUN . .venv/bin/activate && ./scripts/generate.sh
+RUN . .venv/bin/activate && poetry install && ./scripts/generate.sh
 
 
 # Stage 3: Frontend build
