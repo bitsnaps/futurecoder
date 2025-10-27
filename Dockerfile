@@ -17,8 +17,7 @@ WORKDIR /app
 COPY pyproject.toml poetry.lock ./
 
 # Install python dependencies
-RUN poetry lock
-RUN poetry install --only main --no-root
+RUN poetry install --no-root
 
 
 # Stage 2: Static file generation
@@ -30,7 +29,7 @@ WORKDIR /app
 COPY . .
 
 # Generate static files
-RUN . .venv/bin/activate && poetry install && ./scripts/generate.sh
+RUN . .venv/bin/activate && ./scripts/generate.sh
 
 
 # Stage 3: Frontend build
