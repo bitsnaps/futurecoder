@@ -56,6 +56,7 @@ WORKDIR /app/frontend
 RUN npm ci
 
 # Build the frontend
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN npm run build
 
 
