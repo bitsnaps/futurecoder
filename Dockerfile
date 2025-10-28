@@ -16,7 +16,7 @@ WORKDIR /app
 # Copy poetry files
 COPY pyproject.toml poetry.lock ./
 
-# Install python dependencies
+# Regenerate lock file and install all dependencies (including dev)
 RUN poetry lock
 RUN poetry install --no-root
 
@@ -45,9 +45,11 @@ COPY frontend/src ./frontend/src/
 COPY frontend/craco.config.js ./frontend/
 
 # Copy generated files from the previous stage
-COPY --from=static-generator /app/frontend/src/python_book.js ./frontend/src/
-COPY --from=static-generator /app/frontend/src/generated_steps.js ./frontend/src/
-COPY --from=static-generator /app/frontend/public/service-worker.js ./frontend/public/
+# Corrected filenames based on script analysis
+COPY --from=static-generator /app/frontend/src/book/pages.json.load_by_url ./frontend/src/book/
+COPY --from=static-generator /app/frontend/src/python_core.tar.load_by_url ./frontend/src/
+COPY --from=static-generator /app/frontend/src/chapters.json ./frontend/src/
+COPY --from=static-generator /app/frontend/src/terms.json ./frontend/src/
 
 # Install npm dependencies
 WORKDIR /app/frontend
